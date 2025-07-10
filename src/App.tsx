@@ -2,14 +2,35 @@ import { useState } from 'react'
 import reactLogo from './assets/botanical-gin.png'
 import viteLogo from './assets/rose-gin.jpg'
 import melonLogo from './assets/melon-gin.png'
+import UploadImage from "./components/UploadImage";
 import './App.css'
+
+
+
 
 function App() {
   const [count, setCount] = useState(0)
+  const [imageUrls, setImageUrls] = useState<string[]>([]);
+
 
   return (
     <>
       <div>
+      <div>
+      <h1>Mini-Bar</h1>
+      <UploadImage onUpload={(urls) => setImageUrls((prev) => [...prev, ...urls])} />
+      <div style={{ display: "flex", flexWrap: "wrap", marginTop: "20px" }}>
+        {imageUrls.map((img, index) => (
+          <img
+            key={index}
+            src={img}
+            alt={`Uploaded ${index}`}
+            style={{ width: "100px", height: "100px", margin: "10px" }}
+          />
+        ))}
+      </div>
+    </div>
+        
         <a href="https://vite.dev" target="_blank">
           <img src={viteLogo} className="logo" alt="Vite logo" />
         </a>
